@@ -1,5 +1,5 @@
+(function() {
   'use strict';
-{
 
   let price = document.getElementById('price');
   let num = document.getElementById('num');
@@ -10,7 +10,7 @@
 
   function checkInput() {
     if (
-      price.value.match(/^[1-9][0-9]*$/) !== null &&
+      price.value.match(/^[1-9][0-9]*$/) !== null && //正規表現 //!== 等しくない //null 値が存在しない //&& かつ
       num.value.match(/^[1-9][0-9]*$/) !== null
     ) {
       btn.classList.remove('disabled');
@@ -31,20 +31,20 @@
 
     payLess = Math.floor(price.value / num.value / unit.value) * unit.value;
     short = price.value - (payLess * num.value);
-    payMore = Math.ceil(price.value / num.value / unit.value) * unit.value;
-    over = Math.abs(price.value - (payMore * num.value));
-    if (over === 0 && short === 0) {
-      str = '一人 ' + (price.value / num.value) + ' 円ちょうどです！';
+    payMore = Math.ceil(price.value / num.value / unit.value) * unit.value; //Math.ceil 切り上げ
+    over = Math.abs(price.value - (payMore * num.value)); //Math.abs 絶対値
+    if (short === 0 && over === 0) {
+      str = '一人' + (price.value / num.value) + '円丁度です！';
     } else {
       str =
-        '一人 ' + payLess + ' 円だと ' + short + ' 円足りません。' +
-        '一人 ' + payMore + ' 円だと ' + over + ' 円余ります。';
+      '一人 ' + payLess + ' 円だと ' + short + ' 円足りません。' +
+      '一人 ' + payMore + ' 円だと ' + over + ' 円余ります。';
     }
     result.textContent = str;
     reset.classList.remove('hidden');
   });
 
-  price.addEventListener('keyup', checkInput);
+  price.addEventListener('keyup', checkInput); //keyup
   num.addEventListener('keyup', checkInput);
 
   reset.addEventListener('click', function() {
@@ -55,8 +55,7 @@
     btn.classList.add('disabled');
     this.classList.add('hidden');
     price.focus();
-  })
+  });
 
   price.focus();
-  
-}
+})();
